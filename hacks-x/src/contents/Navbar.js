@@ -4,20 +4,17 @@ import { useAuth0 } from "@auth0/auth0-react";  // Import the hook
 import './Navbar.css';
 
 function Navbar() {
-  // State for toggling the hamburger menu on mobile view
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
   // Function to toggle hamburger menu
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  // Get Auth0 states
-  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
-
   return (
     <nav className="navbar">
-      <h1 className="logo"></h1>
+      <h1 className="logo">MyApp</h1>
 
       {/* Hamburger Icon */}
       <div className={`hamburger ${isOpen ? "active" : ""}`} onClick={toggleMenu}>
@@ -29,7 +26,7 @@ function Navbar() {
       {/* Navbar Links */}
       <div className={`menu ${isOpen ? "active" : ""}`}>
         <Link className="nav-link" to="/">Home</Link>
-        <a className="nav-link" href="schedule">Schedule</a>
+        <Link className="nav-link" to="/schedule">Schedule</Link>
 
         {/* Conditionally render based on authentication */}
         {isAuthenticated ? (
@@ -43,7 +40,7 @@ function Navbar() {
             </button>
           </>
         ) : (
-          <a className="nav-link" onClick={() => loginWithRedirect()}>Sign Up / Login</a>  /* Show Login if not authenticated */
+          <button className="nav-link" onClick={() => loginWithRedirect()}>Sign Up / Login</button>  /* Show Login if not authenticated */
         )}
       </div>
     </nav>
