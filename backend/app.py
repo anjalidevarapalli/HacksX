@@ -4,6 +4,11 @@ import json
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
+
+app = Flask(__name__)
+CORS(app, resources={r"/generate_playlist": {"origins": "http://localhost:3000/schedule"}}), 
 
 # Load environment variables from .env file
 load_dotenv()
@@ -84,11 +89,13 @@ def generate_playlist(keywords):
     response = genai.GenerativeModel("gemini-pro").generate_content(prompt)
     return response.text.split("\n")
 
-@app.route("/generate_playlist", methods=["GET"])
+@app.route("/generate_playlist", methods=["POST"])
+@cross_origin(origin='*',headers=['Content-Type','application/json'], supports_credentials=True  )
 def get_playlist():
     calendar_data = load_calendar_data()
     keywords = extract_keywords(calendar_data["items"])
     playlist = generate_playlist(keywords)
+    print (jsonify({"playlist": playlist}))
     return jsonify({"playlist": playlist})
 
 if __name__ == "__main__":
