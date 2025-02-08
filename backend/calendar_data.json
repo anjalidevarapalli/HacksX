@@ -1,0 +1,66 @@
+{
+    "kind": "calendar#events",
+    "summary": "User's Calendar",
+    "items": [
+        {
+            "summary": "Morning Run",
+            "start": {
+                "dateTime": "2025-02-08T06:00:00-05:00"
+            },
+            "end": {
+                "dateTime": "2025-02-08T07:00:00-05:00"
+            },
+            "description": "Exercise session at the gym"
+        },
+        {
+            "summary": "Work Meeting",
+            "start": {
+                "dateTime": "2025-02-08T09:00:00-05:00"
+            },
+            "end": {
+                "dateTime": "2025-02-08T10:00:00-05:00"
+            },
+            "description": "Project discussion with team"
+        },
+        {
+            "summary": "Lunch Break",
+            "start": {
+                "dateTime": "2025-02-08T12:00:00-05:00"
+            },
+            "end": {
+                "dateTime": "2025-02-08T13:00:00-05:00"
+            },
+            "description": "Relaxing lunch at a cafe"
+        },
+        {
+            "summary": "Coding Session",
+            "start": {
+                "dateTime": "2025-02-08T15:00:00-05:00"
+            },
+            "end": {
+                "dateTime": "2025-02-08T17:00:00-05:00"
+            },
+            "description": "Deep work programming session"
+        },
+        {
+            "summary": "Evening Yoga",
+            "start": {
+                "dateTime": "2025-02-08T19:00:00-05:00"
+            },
+            "end": {
+                "dateTime": "2025-02-08T20:00:00-05:00"
+            },
+            "description": "Calm meditation and stretching"
+        },
+        {
+            "summary": "Night Party",
+            "start": {
+                "dateTime": "2025-02-08T22:00:00-05:00"
+            },
+            "end": {
+                "dateTime": "2025-02-09T01:00:00-05:00"
+            },
+            "description": "Dancing and socializing"
+        }
+    ]
+}
