@@ -4,16 +4,16 @@ import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
+import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './Schedule.css'
 
-const locales = {
-  'en-US': require('date-fns/locale/en-US')
-};
-
+// Localizer for React Big Calendar
+const locales = { 'en-US': enUS };
 const localizer = dateFnsLocalizer({
   format,
   parse,
-  startOfWeek,
+  startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 0 }),
   getDay,
   locales,
 });
@@ -32,22 +32,28 @@ const Schedule = () => {
     },
   ]);
 
+  // Track the selected view
+  const [currentView, setCurrentView] = useState('week');
+
   return (
     <div className="schedule-container">
       <div className="schedule-content">
-        <h2>Your Schedule</h2>
-        <p>Select a date to view your schedule details:</p>
-        
+        <h2 className="schedule-title">Your Schedule</h2>
+        <p className="schedule-description">
+          Select a date to view your schedule details:
+        </p>
+
+        {/* Calendar Component */}
         <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 500 }}
-          className="calendar"
-          views={['month', 'week', 'day', 'agenda']} // This enables multiple views
-          defaultView="week" // You can set the default view to 'week', 'day', or 'agenda'
-        />
+  localizer={localizer}
+  events={events}
+  startAccessor="start"
+  endAccessor="end"
+  className="calendar"
+  views={['month', 'week', 'day', 'agenda']}
+  style={{ height: 'auto', width: 'auto' }} // Ensures it takes up full box space
+/>
+
       </div>
     </div>
   );
