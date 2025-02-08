@@ -5,10 +5,13 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family:'Tera';
-  background: url("../public/assets/back.jpg") no-repeat center center fixed; /* Background image */
-  background-size: cover; /* Ensure the image covers the entire screen */
-  color: white;
+  font-family:'LXND 80';
+  background: 
+    
+    url("../public/assets/lottie-animation.gif") no-repeat center center fixed,
+    url("../public/assets/backy.jpg") no-repeat center center fixed; /* Background image */
+  background-size: cover, cover;  /* Ensure the image covers the entire screen */
+  color: #d4d4d4;
   display: flex;
   justify-content: flex-start; /* Align content to the side */
 }
@@ -16,6 +19,7 @@ body, html {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'LXND 80';
 }
+
 
 /* App Container */
 .app-container {
@@ -116,21 +120,7 @@ body {
   line-height: 1.5;
 }
 
-.google-button {
-  margin-top: 1.5rem;
-  padding: 1rem 2rem;
-  background: linear-gradient(90deg, #ff8a00, #e52e71);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-}
 
-.google-button:hover {
-  background: linear-gradient(90deg, #e52e71, #ff8a00);
-}
 
 /* GIF Styles */
 .home-container .gif-container {
@@ -233,4 +223,97 @@ body {
 
 .navbar .hamburger.active .line:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
+}
+
+
+.featured-albums {
+  margin-bottom: 50px;
+}
+
+.featured-albums h2 {
+  font-family: 'Lexend Tera', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.albums {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+.album {
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.album img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.album h3 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.album p {
+  font-size: 1rem;
+  color: black;
+}
+
+.album:hover {
+  transform: scale(1.05);
+}
+
+/* Artists Section */
+.artists {
+  margin-bottom: 50px;
+}
+
+.artists h2 {
+  font-family: 'Lexend Tera', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.artist-cards {
+  display: flex;
+  gap: 20px;
+}
+
+.artist-card {
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.artist-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.artist-card h3 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.artist-card:hover {
+  transform: scale(1.05);
+}
+
+/* Footer */
+.footer {
+  background-color: #181818;
+  text-align: center;
+  padding: 10px;
+}
+
+.footer p {
+  font-size: 1rem;
 }
