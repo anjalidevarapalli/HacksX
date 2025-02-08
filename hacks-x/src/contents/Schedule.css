@@ -1,0 +1,27 @@
+.calendar {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    color: #333;
+  }
+  
+  .rbc-calendar {
+    min-height: 600px;
+  }
+  
+  .rbc-header {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 8px;
+  }
+  
+  .rbc-event {
+    background-color: #3174ad !important;
+  }
+  
+  .rbc-today {
+    background-color: rgba(49, 116, 173, 0.1) !important;
+  }
+  
+  .rbc-off-range-bg {
+    background-color: rgba(0, 0, 0, 0.05);
+  }

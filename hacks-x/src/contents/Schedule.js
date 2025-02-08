@@ -1,25 +1,55 @@
-import React from "react";
-import '../styles/index.css'
+import React, { useState } from 'react';
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+import startOfWeek from 'date-fns/startOfWeek';
+import getDay from 'date-fns/getDay';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-function Schedule() {
+const locales = {
+  'en-US': require('date-fns/locale/en-US')
+};
+
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
+
+const Schedule = () => {
+  // Sample events - you can replace these with your actual events
+  const [events] = useState([
+    {
+      title: 'Meeting',
+      start: new Date(2024, 1, 15, 10, 0), // Year, Month (0-based), Day, Hours, Minutes
+      end: new Date(2024, 1, 15, 11, 0),
+    },
+    {
+      title: 'Conference',
+      start: new Date(2024, 1, 20, 13, 0),
+      end: new Date(2024, 1, 20, 15, 0),
+    },
+  ]);
+
   return (
-    <div id="schedule" className="schedule-container">
-      <h1>Schedule</h1>
+    <div className="schedule-container">
       <div className="schedule-content">
-        <div className="schedule-item">Event 1: Meeting with team</div>
-        <div className="schedule-item">Event 2: Lunch break</div>
-        <div className="schedule-item">Event 3: Coding session</div>
-        <div className="schedule-item">Event 4: Workshop on React</div>
-        <div className="schedule-item">Event 5: Client call</div>
-        <div className="schedule-item">Event 6: Review sprint progress</div>
-        <div className="schedule-item">Event 7: Weekly team sync</div>
-        <div className="schedule-item">Event 8: Networking event</div>
-        <div className="schedule-item">Event 9: Happy hour</div>
-        <div className="schedule-item">Event 10: End of day wrap-up</div>
-        {/* Add more events as needed */}
+        <h2>Your Schedule</h2>
+        <p>Select a date to view your schedule details:</p>
+        
+        <Calendar
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 500 }}
+          className="calendar"
+        />
       </div>
     </div>
   );
-}
+};
 
 export default Schedule;
