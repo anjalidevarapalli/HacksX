@@ -1,43 +1,97 @@
-/* General Styles */
-body {
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Tera&display=swap');
+
+body, html {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #1a1a1a;
+  padding: 0;
+  height: 100%;
+  font-family:'Tera';
+  background: url("../public/assets/back.jpg") no-repeat center center fixed; /* Background image */
+  background-size: cover; /* Ensure the image covers the entire screen */
   color: white;
+  display: flex;
+  justify-content: flex-start; /* Align content to the side */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'LXND 80';
 }
 
 /* App Container */
 .app-container {
   min-height: 100vh;
+  margin-left: 250px; /* Offset by sidebar width */
+  width: calc(100% - 250px); /* Ensure content doesn't overlap */
+  padding: 2rem;
 }
 
-/* Navbar */
+/* Navbar (Side Navigation Bar) */
 .navbar {
-  background-color: #333;
-  padding: 1rem;
+  background-color: #204145; /* Dark blackish-green for sidebar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px; /* Sidebar width */
+  height: 100%;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  z-index: 1000;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-.logo {
-  font-size: 1.5rem;
+.navbar .logo {
+  font-size: 2rem;
   font-weight: bold;
+  color: #FFD700; /* Gold color for logo */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
 }
 
-.nav-links {
-  display: flex;
-  gap: 1rem;
+.navbar .menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.nav-link {
+.navbar .menu li {
+  margin: 15px 0;
+}
+
+.navbar .menu li a {
   color: white;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+  transition: color 0.3s ease-in-out;
 }
 
-.nav-link:hover {
-  text-decoration: underline;
+.navbar .menu li a:hover {
+  color: #FFD700; /* Gold hover effect */
+}
+
+.navbar .menu li a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: #FFD700;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar .menu li a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Body Padding to Prevent Navbar Overlap */
+body {
+  padding-left: 250px; /* Create space for the sidebar */
 }
 
 /* Home Page */
@@ -51,29 +105,39 @@ body {
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 3rem;
+  font-weight: 600;
 }
 
 .description {
   margin-top: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   max-width: 600px;
+  line-height: 1.5;
 }
 
 .google-button {
   margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #4285f4;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
   cursor: pointer;
+  transition: background 0.3s ease-in-out;
 }
 
 .google-button:hover {
-  background-color: #357ae8;
+  background: linear-gradient(90deg, #e52e71, #ff8a00);
+}
+
+/* GIF Styles */
+.home-container .gif-container {
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
 }
 
 /* Schedule Page */
@@ -81,12 +145,12 @@ body {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .schedule-title {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
 .schedule-description {
@@ -96,15 +160,77 @@ body {
 
 .schedule-box {
   margin-top: 1.5rem;
-  background-color: #444;
-  padding: 1rem;
+  background: rgba(68, 68, 68, 0.9);
+  padding: 1.2rem;
   border-radius: 10px;
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .event {
   font-size: 1rem;
   margin: 0.5rem 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .navbar .logo {
+    font-size: 1.5rem;
+  }
+
+  .navbar .menu {
+    flex-direction: row;
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #004d4d;
+    padding: 1rem;
+  }
+
+  .navbar .menu.active {
+    display: flex;
+  }
+
+  .navbar .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .navbar .hamburger .line {
+    width: 28px;
+    height: 3px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.3s;
+  }
+
+  body {
+    padding-left: 0;
+  }
+}
+
+/* Active Hamburger Animation */
+.navbar .hamburger.active .line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar .hamburger.active .line:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar .hamburger.active .line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
