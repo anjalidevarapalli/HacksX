@@ -39,18 +39,6 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-/* Title Animation */
-.title-section {
-  opacity: 0;
-  transform: translateY(30px); /* Start lower */
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-.title-section.show {
-  opacity: 1;
-  transform: translateY(-10.5rem); /* Move up smoothly */
-}
-
 /* General Text Styling */
 .description {
   font-size: 1.5rem;
