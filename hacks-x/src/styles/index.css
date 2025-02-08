@@ -1,0 +1,13 @@
+/* Enable Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: You can also add custom styles for the navbar link hover effect */
+.nav-link {
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffb400; /* Color change on hover */
+}
