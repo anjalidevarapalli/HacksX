@@ -1,71 +1,40 @@
+// server.js
 const express = require('express');
-const axios = require('axios');
-const dotenv = require('dotenv');
-dotenv.config();
+const { getCalendarEvents } = require('./googleCalendar');  // Import calendar module
+const { searchTracks, createPlaylist, addTracksToPlaylist } = require('./spotify');  // Import spotify module
 
 const app = express();
-app.use(express.json());
 
-// Sample data for calendar events (received from your friend's Okta-validated app)
-const calendarEvents = [
-  { summary: 'Yoga', start: '2025-02-07T08:00:00', end: '2025-02-07T09:00:00' },
-  { summary: 'Meeting with team', start: '2025-02-07T10:00:00', end: '2025-02-07T11:00:00' },
-  // More events here
-];
-
-// Get Spotify Auth Token (Use a token provided by your friend's implementation or get one using OAuth)
-const SPOTIFY_AUTH_TOKEN = process.env.SPOTIFY_AUTH_TOKEN;
-
-// Function to search for Spotify tracks based on activity name (calendar event summary)
-async function searchSpotifyTrack(activity) {
+app.get('/calendar-events', async (req, res) => {
   try {
-    const response = await axios.get('https://api.spotify.com/v1/search', {
-      headers: {
-        'Authorization': `Bearer ${SPOTIFY_AUTH_TOKEN}`,
-      },
-      params: {
-        q: activity, // Search query (e.g., 'Yoga', 'Meeting', etc.)
-        type: 'track',
-      },
-    });
-    return response.data.tracks.items[0]; // Returning the first track found
+    const keywords = await getCalendarEvents();  // Get the keywords directly from Google Calendar
+    res.json({ keywords });  // Return the keywords to the frontend
   } catch (error) {
-    console.error('Error searching for track on Spotify', error);
+    res.status(500).json({ error: 'Failed to fetch calendar events' });
   }
-}
+});
 
-// API route to process calendar events and generate a playlist
-app.post('/generate-playlist', async (req, res) => {
+app.get('/generate-playlist', async (req, res) => {
   try {
-    const events = req.body.events || calendarEvents; // Use events from frontend or the sample data
+    const keywords = await getCalendarEvents();  // Get keywords based on the calendar events
 
-    let playlist = [];
-
-    // Loop through each event, search for a track, and add to the playlist
-    for (const event of events) {
-      const activity = event.summary;
-      const track = await searchSpotifyTrack(activity);
-
-      if (track) {
-        playlist.push({
-          activity: activity,
-          track: {
-            name: track.name,
-            artist: track.artists[0].name,
-            url: track.external_urls.spotify,
-          },
-        });
-      }
+    let allTracks = [];
+    for (let keyword of keywords) {
+      const tracks = await searchTracks(keyword);
+      allTracks = [...allTracks, ...tracks];  // Add the tracks to the list
     }
 
-    res.json({ playlist });
+    const playlistId = await createPlaylist('Calendar Playlist');
+    await addTracksToPlaylist(playlistId, allTracks);
+
+    res.send('Playlist generated successfully!');
   } catch (error) {
-    console.error('Error generating playlist', error);
-    res.status(500).json({ error: 'Failed to generate playlist' });
+    console.error('Error details:', error);  // Log the error for debugging
+    res.status(500).send('Error generating playlist: ' + (error.message || error));  // Detailed error message
   }
 });
 
 // Start the server
-app.listen(5000, () => {
-  console.log('Server running on http://localhost:5000');
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });
