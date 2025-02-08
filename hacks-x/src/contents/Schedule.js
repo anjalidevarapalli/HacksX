@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
@@ -6,18 +6,13 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import './Schedule.css'
+import './Schedule.css';
 
-// Localizer for React Big Calendar
 const locales = { 'en-US': enUS };
 const localizer = dateFnsLocalizer({
   format,
   parse,
-<<<<<<< HEAD
   startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 0 }),
-=======
-  startOfWeek ,
->>>>>>> 3df3f6a4fba4450378c70e2b31da69930f8bc0e3
   getDay,
   locales,
 });
@@ -36,8 +31,30 @@ const Schedule = () => {
     },
   ]);
 
+  const [playlist, setPlaylist] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Function to fetch playlist data from the Flask API
+  const fetchPlaylist = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost:5001/generate_playlist'); // Replace with your Flask API URL
+      const data = await response.json();
+      setPlaylist(data.playlist);
+      console.log(data)
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching playlist:', error);
+      setLoading(false);
+    }
+  };
+
   // Track the selected view
   const [currentView, setCurrentView] = useState('week');
+
+  useEffect(() => {
+    fetchPlaylist(); // Fetch playlist on component mount
+  }, []);
 
   return (
     <div className="schedule-container">
@@ -49,19 +66,43 @@ const Schedule = () => {
 
         {/* Calendar Component */}
         <Calendar
-  localizer={localizer}
-  events={events}
-  startAccessor="start"
-  endAccessor="end"
-  className="calendar"
-  views={['month', 'week', 'day', 'agenda']}
-  style={{ height: 'auto', width: 'auto' }} // Ensures it takes up full box space
-/>
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          className="calendar"
+          views={['month', 'week', 'day', 'agenda']}
+          style={{ height: 'auto', width: 'auto' }} // Ensures it takes up full box space
+        />
 
+        {/* Playlist Card */}
+        <div className="songs-card">
+          <div className="songs-title">Your Playlist</div>
+          <div className="songs-description">
+            Discover your personalized playlist based on your schedule!
+          </div>
+
+          {loading ? (
+            <div>Loading playlist...</div>
+          ) : (
+            <div className="songs-list">
+              {playlist.length > 0 ? (
+                playlist.map((song, index) => (
+                  <div className="song-item" key={index}>
+                    <a href={song} className="song-link" target="_blank" rel="noopener noreferrer">
+                      Watch on YouTube
+                    </a>
+                  </div>
+                ))
+              ) : (
+                <p>No songs available</p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
 export default Schedule;
-
