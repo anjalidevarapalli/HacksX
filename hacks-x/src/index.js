@@ -10,7 +10,10 @@ root.render(
     <Auth0Provider
       domain={process.env.REACT_APP_AUTH0_DOMAIN}  // Use env variable
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}  // Use env variable
-      authorizationParams={{ redirect_uri: window.location.origin }}
+      authorizationParams={{ redirect_uri: window.location.origin,
+      //audience: process.env.REACT_APP_AUTH0_AUDIENCE, 
+        scope: 'openid profile email https://www.googleapis.com/auth/calendar.readonly',
+      }}
     >
   <React.StrictMode>
     <App />

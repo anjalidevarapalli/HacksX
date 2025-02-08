@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
+    "@googleapis/calendar": "^9.7.9",
     "buffer": "^6.0.3",
     "cra-template": "1.2.0",
     "date-fns": "^4.1.0",
@@ -11,6 +12,7 @@
     "googleapis": "^144.0.0",
     "react": "^19.0.0",
     "react-big-calendar": "^1.17.1",
+    "react-big-schedule": "^4.4.5",
     "react-calendar": "^5.1.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",

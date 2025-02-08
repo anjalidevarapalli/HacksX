@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import App from './calendar'
 
 const locales = {
   'en-US': require('date-fns/locale/en-US')
 };
-
 const localizer = dateFnsLocalizer({
   format,
   parse,
@@ -37,7 +38,7 @@ const Schedule = () => {
       <div className="schedule-content">
         <h2>Your Schedule</h2>
         <p>Select a date to view your schedule details:</p>
-        
+        <App/ >
         <Calendar
           localizer={localizer}
           events={events}
@@ -47,7 +48,7 @@ const Schedule = () => {
           className="calendar"
           views={['month', 'week', 'day', 'agenda']} // This enables multiple views
           defaultView="week" // You can set the default view to 'week', 'day', or 'agenda'
-        />
+        /> 
       </div>
     </div>
   );
