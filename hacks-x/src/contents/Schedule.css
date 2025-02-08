@@ -1,27 +1,58 @@
+/* Schedule Container */
+.schedule-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh; /* Full screen height */
+}
+
+/* Title & Description */
+.schedule-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.schedule-description {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 800px;
+}
+
+/* Calendar Box Styling - Bigger */
 .calendar {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 8px;
-    color: #333;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px; /* More padding to make the box look bigger */
+  border-radius: 15px; /* Slightly more rounded */
+  width: 95%; /* Takes up most of the screen */
+  height: 85vh; /* Makes the box taller */
+  max-width: 1600px; /* Prevents it from getting too wide */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Calendar Inside */
+.rbc-calendar {
+  min-height: 85vh; /* Expands the actual calendar */
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .calendar {
+    width: 95%;
+    height: 80vh;
+    padding: 20px; /* Adjust padding on smaller screens */
   }
-  
-  .rbc-calendar {
-    min-height: 600px;
+
+  .schedule-title {
+    font-size: 2.5rem;
   }
-  
-  .rbc-header {
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 8px;
+
+  .schedule-description {
+    font-size: 1.2rem;
   }
-  
-  .rbc-event {
-    background-color: #3174ad !important;
-  }
-  
-  .rbc-today {
-    background-color: rgba(49, 116, 173, 0.1) !important;
-  }
-  
-  .rbc-off-range-bg {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
+}

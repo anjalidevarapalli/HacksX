@@ -1,81 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Home.css";
 
-const About = () => {
-  const features = [
-    {
-      title: "Lyric Analysis",
-      description: "Dive deep into your favorite songs with our advanced lyric analysis tools",
-      icon: "🎵"
-    },
-    {
-      title: "Artist Insights",
-      description: "Discover unique patterns and themes in artists' writing styles",
-      icon: "🎨"
-    },
-    {
-      title: "Genre Exploration",
-      description: "Explore how different genres use language and metaphors",
-      icon: "🎸"
-    },
-    {
-      title: "Mood Detection",
-      description: "Understand the emotional journey of each song",
-      icon: "🎭"
-    }
-  ];
+const Home = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(true);
+    }, 100);
+  }, []);
 
   return (
     <div className="home-container">
-      {/* Hero Section */}
-      <div className="title-section">
-        <h1 className="title">About Lyric Analyzer</h1>
+      {/* Title Section */}
+      <div className={`title-section ${visible ? "show" : ""}`}>
+        <h1 className="main-title">YOUR LIFE, YOUR SOUNDTRACK.</h1>
         <p className="description">
-          Dive deep into the poetry of music with advanced AI-powered analysis
+          Automatically curated playlists based on your daily schedule. Sync your calendar and let the music flow.
         </p>
       </div>
 
-      {/* Features Grid */}
-      <div className="features-grid">
-        {features.map((feature, index) => (
-          <div key={index} className="feature-card">
-            <div className="feature-icon">{feature.icon}</div>
-            <h3 className="feature-title">{feature.title}</h3>
-            <p className="feature-description">{feature.description}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Stats Section */}
-      <div className="stats-section">
-        <div className="stat-card">
-          <h4 className="stat-number">1M+</h4>
-          <p className="stat-label">Songs Analyzed</p>
-        </div>
-        <div className="stat-card">
-          <h4 className="stat-number">50K+</h4>
-          <p className="stat-label">Active Users</p>
-        </div>
-        <div className="stat-card">
-          <h4 className="stat-number">100+</h4>
-          <p className="stat-label">Genres Covered</p>
-        </div>
-      </div>
-
-      {/* Team Section */}
-      <div className="team-section">
-        <h2 className="section-title">Meet Our Team</h2>
-        <div className="team-grid">
-          {[1, 2, 3, 4].map((member) => (
-            <div key={member} className="team-card">
-              <div className="team-image"></div>
-              <h3 className="team-name">Team Member {member}</h3>
-              <p className="team-role">Role</p>
-            </div>
-          ))}
-        </div>
+      {/* Playlist Collage */}
+      <div className="playlist-section">
+        <a href="https://open.spotify.com/playlist/37i9dQZF1DX70RN3TfWWJh" target="_blank" rel="noopener noreferrer" className="playlist-card">
+        <img src={`${process.env.PUBLIC_URL}/assets/workoutplaylist.jpg`} alt="Workout Playlist" />
+        </a>
+        <a href="https://open.spotify.com/track/0WD60mK8KufcVX6hju2MeF" target="_blank" rel="noopener noreferrer" className="playlist-card">
+          <img src={`${process.env.PUBLIC_URL}/assets/focusplaylist.jpg`} alt="Focus Playlist" />
+        </a>
+        <a href="https://open.spotify.com/playlist/37i9dQZF1EIfk2N1Y8uPoA" target="_blank" rel="noopener noreferrer" className="playlist-card">
+          <img src={`${process.env.PUBLIC_URL}/assets/relaxplaylist.jpg`} alt="Relax Playlist" />
+        </a>
+        <a href="https://open.spotify.com/playlist/37i9dQZF1EIhxsZ1zwdwMW" target="_blank" rel="noopener noreferrer" className="playlist-card">
+          <img src={`${process.env.PUBLIC_URL}/assets/morningplaylist.jpg`} alt="Morning Vibes" />
+        </a>
       </div>
     </div>
   );
 };
 
-export default About;
+export default Home;
