@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import './Navbar.css'
 
 function Navbar() {
+  // State for toggling the hamburger menu on mobile view
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Function to toggle hamburger menu
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <nav className="navbar">
-      <h1 className="logo">🎵 Calendar Playlist Generator</h1>
-      <div className="nav-links">
+      <h1 className="logo"></h1>
+
+      {/* Hamburger Icon */}
+      <div className={`hamburger ${isOpen ? "active" : ""}`} onClick={toggleMenu}>
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+      </div>
+
+      {/* Navbar Links */}
+      <div className={`menu ${isOpen ? "active" : ""}`}>
         <Link className="nav-link" to="/">Home</Link>
-        <Link className="nav-link" to="/schedule">Schedule</Link>
+        {/* Smooth Scroll Link to Schedule */}
+        <a className="nav-link" href="schedule">Schedule</a>
       </div>
     </nav>
   );
