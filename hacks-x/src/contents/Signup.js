@@ -1,4 +1,20 @@
-import { useState } from "react";
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
+const Signup = () => {
+  const { loginWithRedirect } = useAuth0();
+
+  if (!loginWithRedirect) {
+    return <div>Loading...</div>; // Prevent null reference errors
+  }
+
+  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+};
+
+export default Signup;
+
+
+/*import { useState } from "react";
 import  {Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 import  Button  from "../components/ui/Button";
 import  Input  from "../components/ui/Input";
@@ -66,3 +82,4 @@ export default function SignupLogin() {
     </div>
   );
 }
+*/

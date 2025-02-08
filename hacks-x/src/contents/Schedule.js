@@ -13,7 +13,11 @@ const locales = { 'en-US': enUS };
 const localizer = dateFnsLocalizer({
   format,
   parse,
+<<<<<<< HEAD
   startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 0 }),
+=======
+  startOfWeek ,
+>>>>>>> 3df3f6a4fba4450378c70e2b31da69930f8bc0e3
   getDay,
   locales,
 });
@@ -60,3 +64,4 @@ const Schedule = () => {
 };
 
 export default Schedule;
+
