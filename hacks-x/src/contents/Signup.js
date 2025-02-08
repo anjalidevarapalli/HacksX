@@ -3,8 +3,23 @@ import  {Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card"
 import  Button  from "../components/ui/Button";
 import  Input  from "../components/ui/Input";
 import { Link } from "react-router-dom";
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function SignupLogin() {
+const Signup = () => {
+  const { loginWithRedirect } = useAuth0();
+
+  if (!loginWithRedirect) {
+    return <div>Loading...</div>; // Prevent null reference errors
+  }
+
+  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+};
+
+export default Signup;
+/*
+
+export default function Signup() {
   const [isSignup, setIsSignup] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,3 +81,4 @@ export default function SignupLogin() {
     </div>
   );
 }
+*/
