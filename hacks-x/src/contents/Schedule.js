@@ -38,7 +38,14 @@ const Schedule = () => {
   const fetchPlaylist = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5001/generate_playlist'); // Replace with your Flask API URL
+      const response = await fetch('http://127.0.0.1:5001/generate_playlist', {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      }); // Replace with your Flask API URL
       const data = await response.json();
       setPlaylist(data.playlist);
       console.log(data)
