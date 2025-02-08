@@ -107,7 +107,7 @@ const locales = {
 const localizer = dateFnsLocalizer({
   format,
   parse,
-  startOfWeek,
+  startOfWeek ,
   getDay,
   locales,
 });
