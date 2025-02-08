@@ -33,16 +33,17 @@ function Navbar() {
 
         {/* Conditionally render based on authentication */}
         {isAuthenticated ? (
-          <span className="nav-link">Welcome, {user.name}</span>  /* Show username */
+          <>
+            <span className="nav-link">Welcome, {user.name}</span>  {/* Show username */}
+            <button
+              className="nav-link"
+              onClick={() => logout({ returnTo: window.location.origin })}  // Log out user and redirect to home
+            >
+              Log Out
+            </button>
+          </>
         ) : (
           <a className="nav-link" onClick={() => loginWithRedirect()}>Sign Up / Login</a>  /* Show Login if not authenticated */
-        )}
-
-        {/* Optional: Logout button */}
-        {isAuthenticated && (
-          <button className="nav-link" onClick={() => logout({ returnTo: window.location.origin })}>
-            Log Out
-          </button>
         )}
       </div>
     </nav>
