@@ -4,6 +4,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "framer-motion": "^12.4.1",
     "react-big-calendar": "^1.17.1",
     "web-vitals": "^4.2.4"
   }

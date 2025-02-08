@@ -19,11 +19,10 @@ const localizer = dateFnsLocalizer({
 });
 
 const Schedule = () => {
-  // Sample events - you can replace these with your actual events
   const [events] = useState([
     {
       title: 'Meeting',
-      start: new Date(2024, 1, 15, 10, 0), // Year, Month (0-based), Day, Hours, Minutes
+      start: new Date(2024, 1, 15, 10, 0),
       end: new Date(2024, 1, 15, 11, 0),
     },
     {
@@ -46,6 +45,8 @@ const Schedule = () => {
           endAccessor="end"
           style={{ height: 500 }}
           className="calendar"
+          views={['month', 'week', 'day', 'agenda']} // This enables multiple views
+          defaultView="week" // You can set the default view to 'week', 'day', or 'agenda'
         />
       </div>
     </div>
