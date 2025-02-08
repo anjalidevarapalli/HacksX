@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import './Navbar.css'
+import { useAuth0 } from "@auth0/auth0-react";  // Import the hook
+import './Navbar.css';
 
 function Navbar() {
   // State for toggling the hamburger menu on mobile view
@@ -10,6 +11,9 @@ function Navbar() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Get Auth0 states
+  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
   return (
     <nav className="navbar">
@@ -25,10 +29,21 @@ function Navbar() {
       {/* Navbar Links */}
       <div className={`menu ${isOpen ? "active" : ""}`}>
         <Link className="nav-link" to="/">Home</Link>
-        {/* Smooth Scroll Link to Schedule */}
         <a className="nav-link" href="schedule">Schedule</a>
-        <a className="nav-link" to="/signup">Sign Up / Login</a>
 
+        {/* Conditionally render based on authentication */}
+        {isAuthenticated ? (
+          <span className="nav-link">Welcome, {user.name}</span>  /* Show username */
+        ) : (
+          <a className="nav-link" onClick={() => loginWithRedirect()}>Sign Up / Login</a>  /* Show Login if not authenticated */
+        )}
+
+        {/* Optional: Logout button */}
+        {isAuthenticated && (
+          <button className="nav-link" onClick={() => logout({ returnTo: window.location.origin })}>
+            Log Out
+          </button>
+        )}
       </div>
     </nav>
   );
