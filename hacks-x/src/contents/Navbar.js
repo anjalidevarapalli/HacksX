@@ -27,6 +27,8 @@ function Navbar() {
         <Link className="nav-link" to="/">Home</Link>
         {/* Smooth Scroll Link to Schedule */}
         <a className="nav-link" href="schedule">Schedule</a>
+        <a className="nav-link" to="/signup">Sign Up / Login</a>
+
       </div>
     </nav>
   );
