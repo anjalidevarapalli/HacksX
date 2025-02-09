@@ -27,6 +27,7 @@ function Navbar() {
       <div className={`menu ${isOpen ? "active" : ""}`}>
         <Link className="nav-link" to="/">Home</Link>
         <Link className="nav-link" to="/schedule">Schedule</Link>
+        <Link className="nav-link" onClick={()=>loginWithRedirect()}>Sign Up/Log In</Link>
 
         {/* Conditionally render based on authentication */}
         {isAuthenticated ? (
